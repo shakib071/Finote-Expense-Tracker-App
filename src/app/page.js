@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { HiMenu } from "react-icons/hi"; // hamburger icon
 import { FaHome, FaMoneyBillWave, FaChartLine, FaCog } from "react-icons/fa";
+import Navbar from "@/Components/Shared/Navbar";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -67,7 +68,7 @@ export default function Home() {
       {/* Main Content */}
       <main className="flex-1 p-6 bg-white overflow-auto">
         <div>
-          Hello
+          <Navbar></Navbar>
         </div>
 
         {renderContent()}
