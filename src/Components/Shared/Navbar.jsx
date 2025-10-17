@@ -7,14 +7,22 @@ import { HiMoon } from "react-icons/hi";
 
 const Navbar = () => {
     const [darkTheme , setDarkTheme] = useState(false);
-    console.log(darkTheme);
+   
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        console.log('submitted');
+    }
+
     return (
         
         <div className='mb-10 flex justify-between items-center px-3'>
             {/* Searchbar  */}
-            <div className='flex items-center gap-1'>
-                <input className='border-1 border-[#44424288] w-70 px-3 py-1 text-lg rounded-lg' type="text" placeholder='Search Here' />
-                <p className='text-xl p-2 rounded-lg bg-[#1512d8e8] text-white'><IoSearchSharp /></p>
+            <div >
+                <form onSubmit={handleSearch} className='flex items-center gap-2'>
+                    <input className='border-1 border-[#44424288] w-70 px-3 py-1 text-lg rounded-lg' type="text" placeholder='Search Here' />
+                    <button  className='text-xl p-2 rounded-lg bg-[#1512d8e8] text-white' type='submit'><IoSearchSharp /></button>
+                </form>
             </div>
 
             {/* Accessbility Profile  */}

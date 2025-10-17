@@ -1,9 +1,14 @@
 import React from 'react';
-
+import BalanceCard from './BalanceCard';
+import BarChart from './BarCharts';
 const DashBoard = () => {
     return (
         <div>
-            <p>DashBoard</p>
+            <BalanceCard></BalanceCard>
+
+            <div className='mt-15'>
+                <BarChart></BarChart>
+            </div>
         </div>
     );
 };
