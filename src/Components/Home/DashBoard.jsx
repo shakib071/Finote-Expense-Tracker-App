@@ -2,18 +2,22 @@ import React from 'react';
 import BalanceCard from './BalanceCard';
 import BarChart from './BarCharts';
 import DailyExpenseBarChart from './DailyExpenseBarChart';
-import CompareLineChart from './CompareLineChart'
+import CompareLineChart from './CompareLineChart';
+import MonthlyExpensePercentage from './MonthlyExpensePercentage';
 const DashBoard = () => {
     return (
         <div>
             <BalanceCard></BalanceCard>
 
-            <div className='mt-15 mb-15'>
+            <div className='mt-15 mb-15 flex gap-5'>
                 <BarChart></BarChart>
+                <MonthlyExpensePercentage></MonthlyExpensePercentage>
             </div>
 
-            <DailyExpenseBarChart></DailyExpenseBarChart>
-            <CompareLineChart></CompareLineChart>
+            <div className='flex flex-col gap-15'>
+                <DailyExpenseBarChart></DailyExpenseBarChart>
+                <CompareLineChart></CompareLineChart>
+            </div>
 
 
         </div>

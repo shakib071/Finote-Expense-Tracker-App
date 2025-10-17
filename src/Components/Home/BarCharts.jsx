@@ -17,9 +17,9 @@ const chartData = [
 
 export default function BarCharts() {
   return (
-    <div>
+    <div className="bg-white p-3 rounded-xl">
       <h2>Top Expenses</h2>
-      <BarChart  width={600} height={300} data={chartData}  margin={{ top: 20, right: 5, left: 5, bottom: 5 }}>
+      <BarChart  width={600} height={300} data={chartData}  margin={{ top: 20, right: 5, left: 5, bottom: 1 }}>
         <CartesianGrid vertical={false} />
         <XAxis dataKey="name" />
         <Tooltip   cursor={{ fill: "transparent" }} />

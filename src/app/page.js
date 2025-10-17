@@ -6,6 +6,7 @@ import { HiMenu } from "react-icons/hi"; // hamburger icon
 import { FaHome, FaMoneyBillWave, FaChartLine, FaCog } from "react-icons/fa";
 import Navbar from "@/Components/Shared/Navbar";
 import DashBoard from "@/Components/Home/DashBoard";
+import Footer from "@/Components/Shared/Footer";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -73,6 +74,10 @@ export default function Home() {
         </div>
 
         {renderContent()}
+
+        <div>
+          <Footer></Footer>
+        </div>
       </main>
     </div>
   );

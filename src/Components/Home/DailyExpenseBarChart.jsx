@@ -113,7 +113,7 @@ export default function DailyExpenseBarChart() {
   };
 
   return (
-    <div style={{ maxWidth: 900, margin: "0 auto" }}>
+    <div className="bg-white p-4 rounded-xl" style={{ maxWidth: 1000, margin: "0 auto" }}>
       <h2 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: 16 }}>
         Interactive Bar Chart
       </h2>

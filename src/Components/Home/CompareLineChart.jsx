@@ -14,7 +14,7 @@ const chartData = [
 
 export default function ChartLineMultiple() {
   return (
-    <div style={{ maxWidth: 900, margin: "0 auto", padding: 16 }}>
+    <div className="bg-white rounded-xl" style={{ maxWidth: 1000, margin: "0 auto", padding: 16 }}>
       <h2 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: 4 }}>
         Line Chart - Multiple
       </h2>
