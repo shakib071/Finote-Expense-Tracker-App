@@ -44,15 +44,8 @@ const BalanceCard = () => {
                         <p><span className='text-green-600 font-semibold'>2.34% </span><span className='text-[#0b0b0ba7]'>Last Month</span> <span className='font-semibold text-[#121111d8]'>$20000</span></p>
                     </div>
                 </div>
-
-
-                <div>
-
-                </div>
                 
                
-                
-              
 
             </div>
         </div>

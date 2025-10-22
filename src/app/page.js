@@ -3,13 +3,16 @@
 
 import { useState } from "react";
 import { HiMenu } from "react-icons/hi"; // hamburger icon
-import { FaHome, FaMoneyBillWave, FaChartLine, FaCog } from "react-icons/fa";
+import { FaHome, FaCog } from "react-icons/fa";
 import Navbar from "@/Components/Shared/Navbar";
 import DashBoard from "@/Components/Home/DashBoard";
 import Footer from "@/Components/Shared/Footer";
 // import { FaPlus } from "react-icons/fa";
 import { Plus } from 'lucide-react';
-import { Edit, Trash2, Share2 } from "lucide-react";
+import { Wallet, MinusCircle, Share2 } from "lucide-react";
+import { BarChart3 } from "lucide-react";
+import { User } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 
 
 export default function Home() {
@@ -23,10 +26,14 @@ export default function Home() {
         return <DashBoard></DashBoard>;
       case "expenses":
         return <h2 className="text-2xl font-bold">Track Your Expenses Here</h2>;
-      case "reports":
-        return <h2 className="text-2xl font-bold">View Your Reports</h2>;
-      case "settings":
-        return <h2 className="text-2xl font-bold">Adjust Settings</h2>;
+      case "analytic":
+        return <h2 className="text-2xl font-bold">View Your Analytic</h2>;
+      case "profile":
+        return <h2 className="text-2xl font-bold">Adjust profile</h2>;
+      case "support":
+        return <h2 className="text-2xl font-bold">Adjust support</h2>;
+      case "setting":
+        return <h2 className="text-2xl font-bold">Adjust setting</h2>;
       default:
         return <h2 className="text-2xl font-bold">Welcome to Finote</h2>;
     }
@@ -34,9 +41,10 @@ export default function Home() {
 
   const navItems = [
     { id: "dashboard", label: "Dashboard", icon: <FaHome /> },
-    { id: "expenses", label: "Expenses", icon: <FaMoneyBillWave /> },
-    { id: "reports", label: "Reports", icon: <FaChartLine /> },
-    { id: "settings", label: "Settings", icon: <FaCog /> },
+    { id: "analytic", label: "Analytic", icon: <BarChart3 /> },
+    { id: "profile", label: "Profile", icon: <User /> },
+    { id: "support", label: "Support", icon: <HelpCircle /> },
+    { id: "setting", label: "Setting", icon: <FaCog /> },
   ];
 
   return (
@@ -88,14 +96,12 @@ export default function Home() {
                   : "opacity-0 translate-y-10 pointer-events-none"
               }`}
             >
-              <button className="w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center shadow-md hover:bg-green-600">
-                <Edit className="w-6 h-6" />
+            
+              <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600 text-white shadow-md hover:bg-blue-700 transition">
+              <Wallet className="w-5 h-5" /> Add Balance
               </button>
-              <button className="w-14 h-14 rounded-full bg-red-500 text-white flex items-center justify-center shadow-md hover:bg-red-600">
-                <Trash2 className="w-6 h-6" />
-              </button>
-              <button className="w-14 h-14 rounded-full bg-purple-500 text-white flex items-center justify-center shadow-md hover:bg-purple-600">
-                <Share2 className="w-6 h-6" />
+              <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-red-600 text-white shadow-md hover:bg-red-700 transition">
+                <MinusCircle className="w-5 h-5" /> Add Expense
               </button>
             </div>
 
