@@ -1,4 +1,9 @@
 import React from 'react';
+import { FaFacebook } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
+
 
 const Footer = () => {
     return (
@@ -7,8 +12,12 @@ const Footer = () => {
                 <div>
                     <p className='text-sm'>&copy; Copyright 2025 <span className='font-bold'>Finote</span> | All Rights Reserverd</p>
                 </div>
-                <div>
-                    <p>Social Media</p>
+                <div className='flex items-center gap-4 text-xl'>
+                    <p><FaFacebook /></p>
+                    <p><FaInstagram /></p>
+                    <p><FaYoutube /></p>
+                    <p><SiGmail /></p>
+                    
                 </div>
             </div>
         </div>

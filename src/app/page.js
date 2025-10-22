@@ -7,10 +7,15 @@ import { FaHome, FaMoneyBillWave, FaChartLine, FaCog } from "react-icons/fa";
 import Navbar from "@/Components/Shared/Navbar";
 import DashBoard from "@/Components/Home/DashBoard";
 import Footer from "@/Components/Shared/Footer";
+// import { FaPlus } from "react-icons/fa";
+import { Plus } from 'lucide-react';
+import { Edit, Trash2, Share2 } from "lucide-react";
+
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -71,6 +76,40 @@ export default function Home() {
       <main className="flex-1 p-6 bg-[#807d7d31] overflow-auto">
         <div>
           <Navbar></Navbar>
+
+
+          {/* Plus button  */}
+          <div className="fixed bottom-20 right-20 flex flex-col z-100 items-end space-y-3">
+          {/* Floating options (only show when open) */}
+            <div
+              className={`flex flex-col items-end space-y-3 transition-all duration-300 ${
+                open
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10 pointer-events-none"
+              }`}
+            >
+              <button className="w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center shadow-md hover:bg-green-600">
+                <Edit className="w-6 h-6" />
+              </button>
+              <button className="w-14 h-14 rounded-full bg-red-500 text-white flex items-center justify-center shadow-md hover:bg-red-600">
+                <Trash2 className="w-6 h-6" />
+              </button>
+              <button className="w-14 h-14 rounded-full bg-purple-500 text-white flex items-center justify-center shadow-md hover:bg-purple-600">
+                <Share2 className="w-6 h-6" />
+              </button>
+            </div>
+
+          {/* Main + button */}
+            <button
+              onClick={() => setOpen(!open)}
+              className="flex items-center justify-center w-20 h-20 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition-transform duration-300"
+              style={{ transform: open ? "rotate(45deg)" : "rotate(0deg)" }}
+            >
+              <Plus className="w-8 h-8" />
+            </button>
+          </div>
+
+
         </div>
 
         {renderContent()}
