@@ -9,16 +9,31 @@ import DashBoard from "@/Components/Home/DashBoard";
 import Footer from "@/Components/Shared/Footer";
 // import { FaPlus } from "react-icons/fa";
 import { Plus } from 'lucide-react';
-import { Wallet, MinusCircle, Share2 } from "lucide-react";
+import { Wallet, MinusCircle, X} from "lucide-react";
 import { BarChart3 } from "lucide-react";
 import { User } from "lucide-react";
 import { HelpCircle } from "lucide-react";
+
 
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [open, setOpen] = useState(false);
+  const [showBalanseForm, setShowBalanseForm] = useState(false);
+  const [showExpenseForm, setShowExpenseForm] = useState(false);
+
+  //setShowForm
+
+  const addBalanceForm = () => {
+    setShowBalanseForm(!showBalanseForm);
+    setOpen(false);
+  };
+
+  const addExpenseForm = () =>{
+    setShowExpenseForm(!showExpenseForm);
+    setOpen(false);
+  }
 
   const renderContent = () => {
     switch (activeTab) {
@@ -97,13 +112,90 @@ export default function Home() {
               }`}
             >
             
-              <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600 text-white shadow-md hover:bg-blue-700 transition">
+              <button onClick={addBalanceForm} className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600 text-white shadow-md hover:bg-blue-700 transition">
               <Wallet className="w-5 h-5" /> Add Balance
               </button>
-              <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-red-600 text-white shadow-md hover:bg-red-700 transition">
+              <button onClick={addExpenseForm} className="flex items-center gap-2 px-4 py-2 rounded-full bg-red-600 text-white shadow-md hover:bg-red-700 transition">
                 <MinusCircle className="w-5 h-5" /> Add Expense
               </button>
             </div>
+            
+            {/* Add Balance Form Popup */}
+
+            {showBalanseForm && (
+              <div className="fixed inset-0 bg-[#ffffff40] bg-opacity-50 flex items-center justify-center">
+                <div className="bg-white p-6 rounded-2xl shadow-lg w-80 relative">
+                  <button
+                    onClick={() => setShowBalanseForm(false)}
+                    className="absolute top-3 right-3 text-gray-600 hover:text-red-600"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                  <h2 className="text-xl font-semibold mb-4 text-center">Add Balance</h2>
+                  <form  className="flex flex-col space-y-3">
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Name"
+                      className="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                      required
+                    />
+                    <input
+                      type="number"
+                      name="amount"
+                      placeholder="Amount"
+                      className="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      className="bg-blue-600 text-white rounded-lg py-2 hover:bg-blue-700 transition"
+                    >
+                      Save
+                    </button>
+                  </form>
+                </div>
+              </div>
+            )}
+
+            {/* Add expense form  */}
+            {showExpenseForm && (
+              <div className="fixed inset-0 bg-[#ffffff40] bg-opacity-50 flex items-center justify-center">
+                <div className="bg-white p-6 rounded-2xl shadow-lg w-80 relative">
+                  <button
+                    onClick={() => setShowExpenseForm(false)}
+                    className="absolute top-3 right-3 text-gray-600 hover:text-red-600"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                  <h2 className="text-xl font-semibold mb-4 text-center">Add Balance</h2>
+                  <form  className="flex flex-col space-y-3">
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Name"
+                      className="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                      required
+                    />
+                    <input
+                      type="number"
+                      name="amount"
+                      placeholder="Amount"
+                      className="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      className="bg-blue-600 text-white rounded-lg py-2 hover:bg-blue-700 transition"
+                    >
+                      Save
+                    </button>
+                  </form>
+                </div>
+              </div>
+            ) }
+
+
 
           {/* Main + button */}
             <button
