@@ -29,8 +29,16 @@ const Navbar = () => {
             <div className='flex items-center gap-4 text-2xl'>
                 <p onClick={()=>setDarkTheme(!darkTheme)} className='cursor-pointer'> {darkTheme ? <HiOutlineSun />: <HiMoon />} </p>
                 <p className='cursor-pointer'><HiOutlineBell /></p>
-                <p className='cursor-pointer bg-[#1512d8e8] text-white p-2 rounded-full'><MdPersonOutline /></p>
-            </div>
+                {/* <p className='cursor-pointer bg-[#1512d8e8] text-white p-2 rounded-full'><MdPersonOutline /></p> */}
+                <div className="dropdown dropdown-end">
+
+                    <div tabIndex={0} role="button" className="cursor-pointer bg-[#1512d8e8] text-white p-2 rounded-full"><MdPersonOutline /></div>
+                        <ul tabIndex="-1" className="dropdown-content menu bg-white rounded-box z-1 w-52 p-2 shadow-sm">
+                            <li><a>Item 1</a></li>
+                            <li><a>Item 2</a></li>
+                        </ul>
+                    </div>
+                </div>
 
         </div>
     );
