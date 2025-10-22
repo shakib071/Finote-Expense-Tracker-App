@@ -13,6 +13,7 @@ import { Wallet, MinusCircle, X} from "lucide-react";
 import { BarChart3 } from "lucide-react";
 import { User } from "lucide-react";
 import { HelpCircle } from "lucide-react";
+import Profile from "@/Components/Profile/Profile";
 
 
 
@@ -44,7 +45,7 @@ export default function Home() {
       case "analytic":
         return <h2 className="text-2xl font-bold">View Your Analytic</h2>;
       case "profile":
-        return <h2 className="text-2xl font-bold">Adjust profile</h2>;
+        return <Profile></Profile>;
       case "support":
         return <h2 className="text-2xl font-bold">Adjust support</h2>;
       case "setting":
