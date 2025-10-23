@@ -1,7 +1,7 @@
 // app/page.tsx
 "use client";
 
-import { useState } from "react";
+import { use, useContext, useState } from "react";
 import { HiMenu } from "react-icons/hi"; // hamburger icon
 import { FaHome, FaCog } from "react-icons/fa";
 import Navbar from "@/Components/Shared/Navbar";
@@ -14,6 +14,10 @@ import { BarChart3 } from "lucide-react";
 import { User } from "lucide-react";
 import { HelpCircle } from "lucide-react";
 import Profile from "@/Components/Profile/Profile";
+import useAuth from "@/Hooks/useAuth";
+import { AuthContext } from "@/Components/context/AuthContext";
+
+
 
 
 
@@ -23,6 +27,9 @@ export default function Home() {
   const [open, setOpen] = useState(false);
   const [showBalanseForm, setShowBalanseForm] = useState(false);
   const [showExpenseForm, setShowExpenseForm] = useState(false);
+
+  // const hello = useContext(AuthContext);
+  // console.log('hello is',hello);
 
   //setShowForm
 
