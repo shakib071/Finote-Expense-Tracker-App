@@ -34,8 +34,9 @@ const Navbar = () => {
 
                     <div tabIndex={0} role="button" className="cursor-pointer bg-[#1512d8e8] text-white p-2 rounded-full"><MdPersonOutline /></div>
                         <ul tabIndex="-1" className="dropdown-content menu bg-white rounded-box z-1 w-52 p-2 shadow-sm">
-                            <li><a>Item 1</a></li>
-                            <li><a>Item 2</a></li>
+                            <li><a>Login</a></li>
+                            <li><a>Profile</a></li>
+                            <li><a>Logout</a></li>
                         </ul>
                     </div>
                 </div>
