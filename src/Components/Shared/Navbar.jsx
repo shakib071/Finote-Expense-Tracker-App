@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react';
 import { MdPersonOutline } from "react-icons/md";
 import { HiOutlineBell } from "react-icons/hi2";
