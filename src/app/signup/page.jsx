@@ -13,17 +13,11 @@ import Image from "next/image";
 
 const page = () => {
     const [error,setError] = useState('');
-    const [userRole,setUserRole] = useState('user');
     const {createUser,setUser,updateUserData,setLoading,handleGoogleLogin,addUserToDataBase} = useAuth();
     // const navigate = useNavigate();
     const router = useRouter();
     
 
-
-
-    const handleRoleChange = (e) =>{
-        setUserRole(e.target.value);
-    }
 
 
     const handleRegister = async(e) => {
@@ -35,7 +29,7 @@ const page = () => {
         const email = form.email.value;
         const password = form.password.value;
         const photo = form.photo.files[0];
-        const role = userRole;
+        
 
         if(password.length < 6){
             setError('Password must be 6 charecter long');
@@ -87,7 +81,6 @@ const page = () => {
                         const userData = {
                             username,
                             email,
-                            role,
                             photoURL: data.data.url,
                             uid: user.uid
 
@@ -95,7 +88,7 @@ const page = () => {
 
                         // username,email,role,photoURL,uid
 
-                        // addUserToDataBase(userData);
+                        addUserToDataBase(userData);
                     
                     })
 
@@ -139,7 +132,6 @@ const page = () => {
                 // username,email,role,photoURL,uid
                 username: user.displayName,
                 email: user.email,
-                role: "user",
                 photoURL: user.photoURL,
                 uid: user.uid
 

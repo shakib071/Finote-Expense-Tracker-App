@@ -54,6 +54,17 @@ const page = () => {
         handleGoogleLogin()
         .then((result)=> {
             const user = result.user;
+
+            const userData = {
+                // username,email,role,photoURL,uid
+                username: user.displayName,
+                email: user.email,
+                role: "user",
+                photoURL: user.photoURL,
+                uid: user.uid
+
+            }
+            addUserToDataBase(userData);
             router.push('/');
         })
         .catch((error) => {
@@ -156,7 +167,7 @@ const page = () => {
                         <a href="#">Forget Password</a>
                     </div>
                     <div>
-                        <p className='text-[#8f2c24] font-semibold text-xl'>Don't Have an Account <Link href='/register' className='underline pl-6 text-green-500'>SignUp</Link></p>
+                        <p className='text-[#8f2c24] font-semibold text-xl'>Don't Have an Account <Link href='/signup' className='underline pl-6 text-green-500'>SignUp</Link></p>
                     </div>
                 </div>
                 
