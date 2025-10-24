@@ -5,10 +5,31 @@ import { HiOutlineSun } from "react-icons/hi2";
 import { IoSearchSharp } from "react-icons/io5";
 import { HiMoon } from "react-icons/hi";
 import useAuth from '@/Hooks/useAuth';
+import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
     const [darkTheme , setDarkTheme] = useState(false);
-    const {user} = useAuth();
+    const {logOut,user,loading} = useAuth();
+
+    const router = useRouter();
+
+
+
+    const handleLogout = () => {
+        logOut()
+        .then(() => {
+            router.push('/login');
+        })
+        .catch((error)=>{
+            console.log(error);
+            Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            });
+        })
+    }
    
 
     const handleSearch = (e) => {
@@ -44,7 +65,7 @@ const Navbar = () => {
                             
                             {user && 
                             <><li><a>Profile</a></li>
-                            <li><a>Logout</a></li></>
+                            <li onClick={handleLogout}><a>Logout</a></li></>
                             }
                         </ul>
                     </div>
