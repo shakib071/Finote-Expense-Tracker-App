@@ -8,10 +8,17 @@ import { HiMoon } from "react-icons/hi";
 import useAuth from '@/Hooks/useAuth';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import Avatar from '../../../public/Avatar1.png'
 
 const Navbar = () => {
     const [darkTheme , setDarkTheme] = useState(false);
     const {logOut,user,loading} = useAuth();
+
+
+    
+
+    // console.log('photo url is',user?.photoURL);
 
     const router = useRouter();
 
@@ -38,6 +45,11 @@ const Navbar = () => {
         console.log('submitted');
     }
 
+    
+    if(loading){
+        return 'loading';
+    }
+
     return (
         
         <div className='mb-10 flex justify-between items-center px-3'>
@@ -56,17 +68,31 @@ const Navbar = () => {
                 {/* <p className='cursor-pointer bg-[#1512d8e8] text-white p-2 rounded-full'><MdPersonOutline /></p> */}
                 <div className="dropdown dropdown-end">
 
-                    <div tabIndex={0} role="button" className="cursor-pointer bg-[#1512d8e8] text-white p-2 rounded-full"><MdPersonOutline /></div>
-                        <ul tabIndex="-1" className="dropdown-content menu bg-white rounded-box z-1 w-52 p-2 shadow-sm">
+                    {!user?.photoURL && <div tabIndex={0} role="button" className="cursor-pointer bg-[#1512d8e8] text-white p-2 rounded-full"> <MdPersonOutline /></div>}
 
+                    {user?.photoURL && <div tabIndex={0} role="button" className="cursor-pointer  text-white p-2 rounded-full"><Image className='rounded-full' src={user?.photoURL} width={42} height={42} alt='avater'></Image></div>}
+                    
+                        <ul tabIndex="-1" className="dropdown-content menu bg-white rounded-box z-1 w-68 p-2 shadow-sm">
+                            
                             {!user && 
-                            <><li><a>Login</a></li>
-                            <li><a>SignUp</a></li></>
+                            <><li className='mt-2 border-y-1  border-y-gray-400 hover:bg-gray-200 hover:font-bold'><a>Login</a></li>
+                            <li className='border-b-1 border-b-gray-400 hover:bg-gray-200 hover:font-bold'><a>SignUp</a></li></>
                             }
                             
                             {user && 
-                            <><li><a>Profile</a></li>
-                            <li onClick={handleLogout}><a>Logout</a></li></>
+                            <>
+                            <div className='flex items-center gap-3'>
+                                <div>
+                                    {user?.photoURL && <Image className='w-12 h-12 rounded-full' src={user?.photoURL} width={48} height={48} alt='avater'></Image>}
+                                    {!user?.photoURL && <Image className='w-12 h-12 rounded-full' src={Avatar} alt='avater'></Image>}
+                                </div>
+                                <div>
+                                    <p className='text-lg font-semibold'>Shakib Hasan</p>
+                                    <p className='text-gray-600'>shakibhasan071@gmail.com</p>
+                                </div>
+                            </div>
+                            <li className='mt-2 border-y-1  border-y-gray-400 hover:bg-gray-200 hover:font-bold'><a>Profile</a></li>
+                            <li className='border-b-1 border-b-gray-400 hover:bg-gray-200 hover:font-bold' onClick={handleLogout}><a>Logout</a></li></>
                             }
                         </ul>
                     </div>
