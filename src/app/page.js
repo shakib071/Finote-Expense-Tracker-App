@@ -70,6 +70,9 @@ export default function Home() {
     { id: "setting", label: "Setting", icon: <FaCog /> },
   ];
 
+  const {user} = useAuth();
+  console.log('user is ',user);
+
   return (
     <div className="flex h-screen  justify-center">
       {/* Sidebar */}
