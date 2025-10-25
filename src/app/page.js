@@ -49,7 +49,7 @@ export default function Home() {
 
 
   const addBalaceToDatabase = (userId,data) =>{
-    console.log(data);
+    // console.log(data);
     axiosInstance.post(`/add-income/${userId}`,data)
     .then(res => {
       // console.log('income added',res.data);
@@ -91,6 +91,58 @@ export default function Home() {
 
     addBalaceToDatabase(user?.uid,balanceData);
     setShowBalanseForm(false);
+  }
+
+
+  const addExpenseToDatabase = (userId,data) => {
+    // console.log(userId,data);
+
+    axiosInstance.post(`/add-expense/${userId}`,data)
+    .then(res => {
+    
+      
+      if(res.data.acknowledged || res.data.userId){
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Your expense has been saved",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    })
+    .catch(error => {
+      console.log('Error',error);
+        Swal.fire({
+          position: "top-center",
+          icon: "error",
+          title: "Something went wrong",
+          showConfirmButton: false,
+          timer: 2500
+        });
+    })
+  }
+
+  const handleAddExpense = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    // const category = form.category.value;
+    const name = form.name.value;
+    const amount = form.amount.value;
+    const description = form.description.value || " ";
+    // const date = new Date();
+    // console.log(category,name,amount,description,date);
+
+    const expenseData = {
+      name,
+      amount,
+      description
+      
+    }
+    // console.log(expenseData);
+
+    addExpenseToDatabase(user?.uid,expenseData);
+    setShowExpenseForm(false);
   }
 
   const renderContent = () => {
@@ -228,7 +280,7 @@ export default function Home() {
 
             {/* Add expense form  */}
             {showExpenseForm && (
-              <div className="fixed inset-0 bg-[#ffffff40] bg-opacity-50 flex items-center justify-center">
+              <div className="fixed inset-0 shadow-2xl bg-[#ffffff40] bg-opacity-50 flex items-center justify-center">
                 <div className="bg-white p-6 rounded-2xl shadow-lg w-80 relative">
                   <button
                     onClick={() => setShowExpenseForm(false)}
@@ -237,14 +289,21 @@ export default function Home() {
                     <X className="w-5 h-5" />
                   </button>
                   <h2 className="text-xl font-semibold mb-4 text-center">Add Balance</h2>
-                  <form  className="flex flex-col space-y-3">
+                  <form onSubmit={handleAddExpense}  className="flex flex-col space-y-3 sha">
+                    {/* <input
+                      type="text"
+                      name="category"
+                      placeholder="Category"
+                      className="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                      required
+                    /> */}
                     <input
                       type="text"
                       name="name"
-                      placeholder="Name"
+                      placeholder="Expense Name"
                       className="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none"
                       required
-                    />
+                    /> 
                     <input
                       type="number"
                       name="amount"
@@ -252,6 +311,14 @@ export default function Home() {
                       className="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none"
                       required
                     />
+                    <input
+                      type="text"
+                      name="description"
+                      placeholder="Description"
+                      className="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                      
+                    />
+                    
                     <button
                       type="submit"
                       className="bg-blue-600 text-white rounded-lg py-2 hover:bg-blue-700 transition"
