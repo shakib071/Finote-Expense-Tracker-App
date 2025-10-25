@@ -16,6 +16,8 @@ import { HelpCircle } from "lucide-react";
 import Profile from "@/Components/Profile/Profile";
 import useAuth from "@/Hooks/useAuth";
 import { AuthContext } from "@/Components/context/AuthContext";
+import useAxios from "@/Hooks/useAxios";
+import Swal from "sweetalert2";
 
 
 
@@ -27,6 +29,8 @@ export default function Home() {
   const [open, setOpen] = useState(false);
   const [showBalanseForm, setShowBalanseForm] = useState(false);
   const [showExpenseForm, setShowExpenseForm] = useState(false);
+  const axiosInstance = useAxios();
+  const {user,loading} = useAuth();
 
   // const hello = useContext(AuthContext);
   // console.log('hello is',hello);
@@ -41,6 +45,52 @@ export default function Home() {
   const addExpenseForm = () =>{
     setShowExpenseForm(!showExpenseForm);
     setOpen(false);
+  }
+
+
+  const addBalaceToDatabase = (userId,data) =>{
+    console.log(data);
+    axiosInstance.post(`/add-income/${userId}`,data)
+    .then(res => {
+      // console.log('income added',res.data);
+      
+      if(res.data.acknowledged || res.data.userId){
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Your income has been saved",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    })
+    .catch(error => {
+      console.log('Error',error);
+        Swal.fire({
+          position: "top-center",
+          icon: "error",
+          title: "Something went wrong",
+          showConfirmButton: false,
+          timer: 2500
+        });
+    })
+  }
+
+  const handleBalaceInput = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const amount = form.amount.value;
+    console.log(name,amount);
+    //add to database
+
+    const balanceData = {
+      name,
+      amount
+    }
+
+    addBalaceToDatabase(user?.uid,balanceData);
+    setShowBalanseForm(false);
   }
 
   const renderContent = () => {
@@ -70,8 +120,12 @@ export default function Home() {
     { id: "setting", label: "Setting", icon: <FaCog /> },
   ];
 
-  const {user} = useAuth();
-  console.log('user is ',user);
+  
+  console.log('user is ',user?.uid);
+
+  if(loading){
+    return 'loading';
+  }
 
   return (
     <div className="flex h-screen  justify-center">
@@ -143,7 +197,7 @@ export default function Home() {
                     <X className="w-5 h-5" />
                   </button>
                   <h2 className="text-xl font-semibold mb-4 text-center">Add Balance</h2>
-                  <form  className="flex flex-col space-y-3">
+                  <form onSubmit={handleBalaceInput}  className="flex flex-col space-y-3">
                     <input
                       type="text"
                       name="name"
@@ -151,6 +205,7 @@ export default function Home() {
                       className="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none"
                       required
                     />
+                    
                     <input
                       type="number"
                       name="amount"
@@ -158,6 +213,8 @@ export default function Home() {
                       className="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none"
                       required
                     />
+
+                    
                     <button
                       type="submit"
                       className="bg-blue-600 text-white rounded-lg py-2 hover:bg-blue-700 transition"
