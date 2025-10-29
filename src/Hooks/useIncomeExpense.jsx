@@ -7,8 +7,8 @@ const useIncomeExpense = (userId) => {
     const axiosInstance = useAxios();
     
     return useQuery({
-        querykey: ['get-expense-income',userId],
-        queryFn: ()=> axiosInstance.get(`/get-income-expense/${userId}`).then(res=>res.data),
+        queryKey: ['get-expense-income',userId],
+        queryFn: async ()=> await axiosInstance.get(`/get-income-expense/${userId}`).then(res=>res.data),
         staleTime: 1000*60*5,
     })
 };

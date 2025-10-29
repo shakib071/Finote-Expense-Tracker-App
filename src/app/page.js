@@ -1,7 +1,7 @@
 // app/page.tsx
 "use client";
 
-import { use, useContext, useState } from "react";
+import { use, useContext, useEffect, useRef, useState } from "react";
 import { HiMenu } from "react-icons/hi"; // hamburger icon
 import { FaHome, FaCog } from "react-icons/fa";
 import Navbar from "@/Components/Shared/Navbar";
@@ -18,6 +18,7 @@ import useAuth from "@/Hooks/useAuth";
 // import { AuthContext } from "@/Components/context/AuthContext";
 import useAxios from "@/Hooks/useAxios";
 import Swal from "sweetalert2";
+import useCategories from "@/Hooks/useCategories";
 
 
 
@@ -31,6 +32,58 @@ export default function Home() {
   const [showExpenseForm, setShowExpenseForm] = useState(false);
   const axiosInstance = useAxios();
   const {user,loading,setIsRefetch} = useAuth();
+
+  //add new category 
+
+  const {data:categories,isLoading} = useCategories(user?.uid);
+  const [selected, setSelected] = useState("");
+  const [showInput, setShowInput] = useState(false);
+  const [newOption, setNewOption] = useState("");
+  const inputRef = useRef(null);
+  const [options, setOptions] = useState(categories || []);
+  // console.log('categories are',categories);
+
+  useEffect(()=> {
+    setOptions(categories);
+  },[categories])
+  
+  useEffect(() => {
+    if (showInput && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [showInput])
+
+  const handleSelectChange = (e) => {
+    if (e.target.value === "add-new") {
+      setShowInput(true);
+      setSelected(""); // reset selection
+    } else {
+      setSelected(e.target.value);
+      setShowInput(false);
+    }
+  };
+
+  const addCategoryToDatabase = (category,userId) => {
+    axiosInstance.post(`/add-category/${userId}`,{category})
+    .then(res=> {
+      console.log(res.data);
+      setNewOption("");
+    })
+  }
+
+  const handleAddOption = () => {
+    if (newOption.trim()) {
+      setOptions([...options, newOption]);
+      setSelected(newOption);
+      // setNewOption("");
+      setShowInput(false);
+      // console.log(newOption);
+      addCategoryToDatabase(newOption,user?.uid);
+    } else {
+      alert("Please enter a value");
+    }
+
+  };
   
 
   // const hello = useContext(AuthContext);
@@ -144,6 +197,7 @@ export default function Home() {
     const name = form.name.value;
     const amount = form.amount.value;
     const description = form.description.value || " ";
+    
     // const date = new Date();
     // console.log(category,name,amount,description,date);
 
@@ -151,6 +205,7 @@ export default function Home() {
       name,
       amount,
       description,
+      category: selected,
       color: getRandomColor(),
       
     }
@@ -188,10 +243,12 @@ export default function Home() {
     { id: "setting", label: "Setting", icon: <FaCog /> },
   ];
 
+
+
   
   console.log('user is ',user?.uid);
 
-  if(loading){
+  if(loading || isLoading){
     return 'loading';
   }
 
@@ -294,6 +351,8 @@ export default function Home() {
               </div>
             )}
 
+            
+
             {/* Add expense form  */}
             {showExpenseForm && (
               <div className="fixed inset-0 shadow-2xl bg-[#ffffff40] bg-opacity-50 flex items-center justify-center">
@@ -304,7 +363,7 @@ export default function Home() {
                   >
                     <X className="w-5 h-5" />
                   </button>
-                  <h2 className="text-xl font-semibold mb-4 text-center">Add Balance</h2>
+                  <h2 className="text-xl font-semibold mb-4 text-center">Add Expense</h2>
                   <form onSubmit={handleAddExpense}  className="flex flex-col space-y-3 sha">
                     {/* <input
                       type="text"
@@ -313,6 +372,40 @@ export default function Home() {
                       className="border rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none"
                       required
                     /> */}
+                    <label>Add Category</label>
+                    <div className="border p-2 rounded-lg" style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                      
+                      <select value={selected} required onChange={handleSelectChange}>
+                        <option value="" disabled>
+                          Select an Category
+                        </option>
+                        {options.map((opt, idx) => (
+                          <option key={idx} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                        <option value="add-new">Add New Option</option>
+                      </select>
+
+                      {showInput && (
+                        <div style={{ display: "flex", gap: "5px" }}>
+                          <input
+                            ref={inputRef}
+                            type="text"
+                            value={newOption}
+                            onChange={(e) => setNewOption(e.target.value)}
+                            placeholder="Enter new option"
+                          />
+                          <button type="button" onClick={handleAddOption}>
+                            Submit
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  
+
+                    
+                    
                     <input
                       type="text"
                       name="name"
@@ -365,6 +458,8 @@ export default function Home() {
 
         <div>
           <Footer></Footer>
+          
+          
         </div>
       </main>
     </div>

@@ -1,30 +1,40 @@
 
-import { BarChart, Bar, CartesianGrid, Rectangle, XAxis, Tooltip,LabelList } from "recharts";
+import useAuth from "@/Hooks/useAuth";
+import useTopExpenseByCategory from "@/Hooks/useTopExpenseByCategory";
+import { useEffect } from "react";
+import { BarChart, Bar, CartesianGrid, Rectangle, XAxis, Tooltip} from "recharts";
 
 
-const chartData = [
-  { name: "chrome", expense: 187, fill: "#8884d8" },
-  { name: "safari", expense: 100, fill: "#82ca9d" },
-  { name: "firefox", expense: 375, fill: "#ffc658" },
-  { name: "edge", expense: 173, fill: "#ff7f50" },
-  { name: "other", expense: 90, fill: "#00c49f" },
-  { name: "chrome", expense: 187, fill: "#8884d8" },
-  { name: "safari", expense: 100, fill: "#82ca9d" },
-  { name: "firefox", expense: 375, fill: "#ffc658" },
-  { name: "edge", expense: 173, fill: "#ff7f50" },
-  { name: "other", expense: 90, fill: "#00c49f" },
-];
+
 
 export default function BarCharts() {
+
+  const {user,loading,isRefetch,setIsRefetch} = useAuth();
+  const {data:TopExpenseByCategory,isLoading,refetch} = useTopExpenseByCategory(user?.uid);
+
+  
+
+  useEffect(() => {
+    if(user?.uid && isRefetch){
+      refetch();
+      setIsRefetch(false);
+    }
+  },[isRefetch,setIsRefetch,refetch,user?.uid]);
+
+  if(loading || isLoading){
+    return 'loading';
+  }
+  
   return (
     <div className="bg-white p-3 rounded-xl">
-      <h2>Top Expenses</h2>
-      <BarChart  width={600} height={300} data={chartData}  margin={{ top: 20, right: 5, left: 5, bottom: 1 }}>
+      <h2>Top Expenses this month</h2>
+      
+      <BarChart  width={600} height={300} data={TopExpenseByCategory}  margin={{ top: 20, right: 5, left: 5, bottom: 1 }}>
         <CartesianGrid vertical={false} />
-        <XAxis dataKey="name" />
+        <XAxis dataKey="category" />
         <Tooltip   cursor={{ fill: "transparent" }} />
         <Bar
-          dataKey="expense"
+          dataKey="total"
           radius={8}
           activeIndex={2}
           barSize={80}  
@@ -41,6 +51,7 @@ export default function BarCharts() {
         />
         
       </BarChart>
+      
     </div>
   );
 }

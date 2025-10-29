@@ -9,7 +9,7 @@ const BalanceCard = () => {
     const {data:incomeExpense,isLoading,refetch} = useIncomeExpense(user?.uid);
 
     // console.log('fetch in dashboard',isRefetch,setisRefetch);
-    console.log(incomeExpense);
+    // console.log(incomeExpense);
 
     useEffect(()=>{
         if(user?.uid && isRefetch){
@@ -21,7 +21,7 @@ const BalanceCard = () => {
     console.log(user);
 
     const day = new Date().getDate();
-    console.log(day);
+    // console.log(day);
     
 
     if(loading || isLoading) {
