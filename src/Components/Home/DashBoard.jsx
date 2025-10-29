@@ -7,11 +7,11 @@ import MonthlyExpensePercentage from './MonthlyExpensePercentage';
 import History from '../Shared/History';
 
 
-const DashBoard = ({isRefetch,setisRefetch}) => {
+const DashBoard = () => {
     
     return (
         <div>
-            <BalanceCard isRefetch={isRefetch} setisRefetch = {setisRefetch}></BalanceCard>
+            <BalanceCard></BalanceCard>
 
             <div className='mt-15 mb-15 flex gap-5'>
                 <BarChart></BarChart>

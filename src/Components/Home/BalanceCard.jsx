@@ -4,8 +4,8 @@ import React, { useEffect } from 'react';
 import { HiTrendingUp } from "react-icons/hi";
 import { HiTrendingDown } from "react-icons/hi";
 
-const BalanceCard = ({isRefetch,setisRefetch}) => {
-    const {user,loading} = useAuth();
+const BalanceCard = () => {
+    const {user,loading,isRefetch,setIsRefetch} = useAuth();
     const {data:incomeExpense,isLoading,refetch} = useIncomeExpense(user?.uid);
 
     // console.log('fetch in dashboard',isRefetch,setisRefetch);
@@ -14,9 +14,9 @@ const BalanceCard = ({isRefetch,setisRefetch}) => {
     useEffect(()=>{
         if(user?.uid && isRefetch){
             refetch();
-            setisRefetch(false);
+            setIsRefetch(false);
         }
-    },[user?.uid, isRefetch, refetch, setisRefetch] );
+    },[user?.uid, isRefetch, refetch, setIsRefetch] );
 
     console.log(user);
 

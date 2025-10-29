@@ -9,6 +9,7 @@ const AuthProvider = ({children}) => {
     const [user,setUser] = useState(null);
     const [loading,setLoading] = useState(true);
     const axiosInstance = useAxios();
+    const [isRefetch,setIsRefetch]= useState(false);
     
 
     //google 
@@ -72,6 +73,8 @@ const AuthProvider = ({children}) => {
         login,
         logOut,
         addUserToDataBase,
+        isRefetch,
+        setIsRefetch,
     };
     
     return (

@@ -30,8 +30,8 @@ export default function Home() {
   const [showBalanseForm, setShowBalanseForm] = useState(false);
   const [showExpenseForm, setShowExpenseForm] = useState(false);
   const axiosInstance = useAxios();
-  const {user,loading} = useAuth();
-  const [isRefetch,setisRefetch]= useState(false);
+  const {user,loading,setIsRefetch} = useAuth();
+  
 
   // const hello = useContext(AuthContext);
   // console.log('hello is',hello);
@@ -56,7 +56,7 @@ export default function Home() {
       // console.log('income added',res.data);
       
       if(res.data.acknowledged || res.data.userId){
-        setisRefetch(true);
+        setIsRefetch(true);
         Swal.fire({
           position: "top-center",
           icon: "success",
@@ -103,7 +103,7 @@ export default function Home() {
     axiosInstance.post(`/add-expense/${userId}`,data)
     .then(res => {
     
-      setisRefetch(true);
+      setIsRefetch(true);
       if(res.data.acknowledged || res.data.userId){
         Swal.fire({
           position: "top-center",
@@ -152,7 +152,7 @@ export default function Home() {
   const renderContent = () => {
     switch (activeTab) {
       case "dashboard":
-        return <DashBoard isRefetch={isRefetch} setisRefetch = {setisRefetch}></DashBoard>;
+        return <DashBoard></DashBoard>;
       case "expenses":
         return <h2 className="text-2xl font-bold">Track Your Expenses Here</h2>;
       case "analytic":
