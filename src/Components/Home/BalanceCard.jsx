@@ -1,8 +1,30 @@
-import React from 'react';
+import useAuth from '@/Hooks/useAuth';
+import useIncomeExpense from '@/Hooks/useIncomeExpense';
+import React, { useEffect } from 'react';
 import { HiTrendingUp } from "react-icons/hi";
 import { HiTrendingDown } from "react-icons/hi";
 
-const BalanceCard = () => {
+const BalanceCard = ({isRefetch,setisRefetch}) => {
+    const {user,loading} = useAuth();
+    const {data:incomeExpense,isLoading,refetch} = useIncomeExpense(user?.uid);
+
+    console.log('fetch in dashboard',isRefetch,setisRefetch);
+
+    useEffect(()=>{
+        if(user?.uid && isRefetch){
+            refetch();
+            setisRefetch(false);
+        }
+    },[user?.uid, isRefetch, refetch, setisRefetch] )
+
+    console.log('income expense is',incomeExpense);
+
+    console.log(user);
+
+    if(loading || isLoading) {
+        return 'loading';
+    }
+
     return (
         <div>
 

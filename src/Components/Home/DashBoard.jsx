@@ -5,10 +5,13 @@ import DailyExpenseBarChart from './DailyExpenseBarChart';
 import CompareLineChart from './CompareLineChart';
 import MonthlyExpensePercentage from './MonthlyExpensePercentage';
 import History from '../Shared/History';
-const DashBoard = () => {
+
+
+const DashBoard = ({isRefetch,setisRefetch}) => {
+    
     return (
         <div>
-            <BalanceCard></BalanceCard>
+            <BalanceCard isRefetch={isRefetch} setisRefetch = {setisRefetch}></BalanceCard>
 
             <div className='mt-15 mb-15 flex gap-5'>
                 <BarChart></BarChart>
