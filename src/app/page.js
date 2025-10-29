@@ -38,6 +38,15 @@ export default function Home() {
 
   //setShowForm
 
+  const getRandomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
   const addBalanceForm = () => {
     setShowBalanseForm(!showBalanseForm);
     setOpen(false);
@@ -47,6 +56,7 @@ export default function Home() {
     setShowExpenseForm(!showExpenseForm);
     setOpen(false);
   }
+
 
 
   const addBalaceToDatabase = (userId,data) =>{
@@ -88,7 +98,8 @@ export default function Home() {
 
     const balanceData = {
       name,
-      amount
+      amount,
+      color: getRandomColor(),
     }
 
     addBalaceToDatabase(user?.uid,balanceData);
@@ -139,7 +150,8 @@ export default function Home() {
     const expenseData = {
       name,
       amount,
-      description
+      description,
+      color: getRandomColor(),
       
     }
     // console.log(expenseData);
