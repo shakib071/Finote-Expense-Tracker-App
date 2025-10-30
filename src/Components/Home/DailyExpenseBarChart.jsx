@@ -1,48 +1,29 @@
-import React, { useState, useMemo } from "react";
+import useAuth from "@/Hooks/useAuth";
+import useDailyExpense from "@/Hooks/useDailyExpense";
+import React, { useState, useMemo, useEffect } from "react";
 import { BarChart, Bar, CartesianGrid, XAxis, Tooltip, LabelList } from "recharts";
 
-const chartData = [
-  { date: "2025-10-01", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-02", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-03", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-04", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-05", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-06", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-07", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-08", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-09", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-10", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-11", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-12", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-13", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-14", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-15", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-16", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-17", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-18", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-19", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-20", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-21", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-22", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-23", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-24", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-25", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-26", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-27", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-28", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-29", currentMonth: 0, prevMonth: 0 },
-  { date: "2025-10-30", currentMonth: 1630, prevMonth: 0 },
-  { date: "2025-10-31", currentMonth: 0, prevMonth: 0 },
-];
+
 
 export default function DailyExpenseBarChart() {
+  const {user,loading,isRefetch,setIsRefetch} = useAuth();
   const [activeChart, setActiveChart] = useState("currentMonth");
+  const {data:chartData,isLoading,refetch} = useDailyExpense(user?.uid);
+  console.log('ChartData is',chartData);
+  
+
+  useEffect(()=>{
+    if(user?.uid && isRefetch){
+      refetch();
+      setIsRefetch(false);
+    }
+  },[user?.uid,isRefetch,setIsRefetch,refetch])
 
   // calculate total sums for display
   const total = useMemo(
     () => ({
-      currentMonth: chartData.reduce((acc, curr) => acc + curr.currentMonth, 0),
-      prevMonth: chartData.reduce((acc, curr) => acc + curr.prevMonth, 0),
+      currentMonth: chartData?.reduce((acc, curr) => acc + curr?.currentMonth, 0),
+      prevMonth: chartData?.reduce((acc, curr) => acc + curr?.prevMonth, 0),
     }),
     []
   );
@@ -51,6 +32,10 @@ export default function DailyExpenseBarChart() {
     currentMonth: "#8884d8",
     prevMonth: "#82ca9d",
   };
+
+  if(loading || isLoading){
+    return 'loading';
+  }
 
   return (
     <div className="bg-white p-4 rounded-xl" style={{ maxWidth: 1000, margin: "0 auto" }}>
@@ -75,7 +60,7 @@ export default function DailyExpenseBarChart() {
             }}
           >
             {key === "currentMonth" ? "Current Month" : "Previous Month"} (
-            {total[key].toLocaleString()})
+            {total[key]?.toLocaleString()})
           </button>
         ))}
       </div>
