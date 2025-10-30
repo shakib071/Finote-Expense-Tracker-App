@@ -49,10 +49,10 @@ const transactions = [
   },
 ];
 
-export default function History() {
+export default function ExpenseHistory() {
   return (
     <div className="bg-white rounded-xl shadow-md  p-6 w-full mx-auto">
-      <h2 className="text-lg font-semibold mb-4">Transaction History</h2>
+      <h2 className="text-lg font-semibold mb-4">Expense History</h2>
       <table className="w-full text-left border-collapse">
         <thead>
           <tr className="text-gray-500 text-sm border-b">

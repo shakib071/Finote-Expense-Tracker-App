@@ -2,9 +2,9 @@ import React from 'react';
 import BalanceCard from './BalanceCard';
 import BarChart from './BarCharts';
 import DailyExpenseBarChart from './DailyExpenseBarChart';
-import CompareLineChart from './CompareLineChart';
 import MonthlyExpensePercentage from './MonthlyExpensePercentage';
-import History from '../Shared/History';
+import ExpenseHistory from './ExpenseHistory';
+import IncomeHistory from './IncomeHistory';
 
 
 const DashBoard = () => {
@@ -20,8 +20,8 @@ const DashBoard = () => {
 
             <div className='flex flex-col gap-15'>
                 <DailyExpenseBarChart></DailyExpenseBarChart>
-                <CompareLineChart></CompareLineChart>
-                <History></History>
+                <ExpenseHistory></ExpenseHistory>
+                <IncomeHistory></IncomeHistory>
             </div>
 
 

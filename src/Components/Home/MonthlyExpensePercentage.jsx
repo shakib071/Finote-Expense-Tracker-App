@@ -17,7 +17,7 @@ const MonthlyExpensePercentage = () => {
         }
     },[isRefetch,setIsRefetch,refetch,user?.uid])
 
-    console.log(topMonthlyExpenseByCategory);
+    // console.log(topMonthlyExpenseByCategory);
     if(loading || isLoading || isLoading2) {
         return 'loading';
     } 
