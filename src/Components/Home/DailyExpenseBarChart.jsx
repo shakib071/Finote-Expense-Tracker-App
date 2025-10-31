@@ -9,7 +9,7 @@ export default function DailyExpenseBarChart() {
   const {user,loading,isRefetch,setIsRefetch} = useAuth();
   const [activeChart, setActiveChart] = useState("currentMonth");
   const {data:chartData,isLoading,refetch} = useDailyExpense(user?.uid);
-  console.log('ChartData is',chartData);
+  // console.log('ChartData is',chartData);
   
 
   useEffect(()=>{
