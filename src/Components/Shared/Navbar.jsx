@@ -9,7 +9,8 @@ import useAuth from '@/Hooks/useAuth';
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Avatar from '../../../public/Avatar1.png'
+import Avatar from '../../../public/Avatar1.png';
+import Link from 'next/link';
 
 const Navbar = () => {
     const [darkTheme , setDarkTheme] = useState(false);
@@ -75,8 +76,10 @@ const Navbar = () => {
                         <ul tabIndex="-1" className="dropdown-content menu bg-white rounded-box z-1 w-68 p-2 shadow-sm">
                             
                             {!user && 
-                            <><li className='mt-2 border-y-1  border-y-gray-400 hover:bg-gray-200 hover:font-bold'><a>Login</a></li>
-                            <li className='border-b-1 border-b-gray-400 hover:bg-gray-200 hover:font-bold'><a>SignUp</a></li></>
+                            <>
+                                <li className='mt-2 border-y-1  border-y-gray-400 hover:bg-gray-200 hover:font-bold'><Link href='/login'>Login</Link></li>
+                                <li className='border-b-1 border-b-gray-400 hover:bg-gray-200 hover:font-bold'><Link href='/signup'>SignUp</Link></li>
+                            </>
                             }
                             
                             {user && 
@@ -91,7 +94,7 @@ const Navbar = () => {
                                     <p className='text-gray-600'>shakibhasan071@gmail.com</p>
                                 </div>
                             </div>
-                            <li className='mt-2 border-y-1  border-y-gray-400 hover:bg-gray-200 hover:font-bold'><a>Profile</a></li>
+                            <li className='mt-2 border-y-1  border-y-gray-400 hover:bg-gray-200 hover:font-bold'><Link href='/profile'>Profile</Link></li>
                             <li className='border-b-1 border-b-gray-400 hover:bg-gray-200 hover:font-bold' onClick={handleLogout}><a>Logout</a></li></>
                             }
                         </ul>
