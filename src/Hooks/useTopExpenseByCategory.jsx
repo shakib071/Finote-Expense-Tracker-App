@@ -4,12 +4,12 @@ import React from 'react';
 import useAxios from './useAxios';
 import { useQuery } from '@tanstack/react-query';
 
-const useTopExpenseByCategory = (userId) => {
+const useTopExpenseByCategory = (userId,number=10) => {
     const axiosInstance = useAxios();
     
     return useQuery({
         queryKey: ['get-expense-history',userId],
-        queryFn: async ()=> await axiosInstance.get(`/get-top10-expense-history/${userId}`).then(res=>res.data),
+        queryFn: async ()=> await axiosInstance.get(`/get-top10-expense-history/${userId}?number=${number}`).then(res=>res.data),
         staleTime:1000*60*5,
     })
 };

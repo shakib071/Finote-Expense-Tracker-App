@@ -5,17 +5,30 @@ import DailyExpenseBarChart from './DailyExpenseBarChart';
 import MonthlyExpensePercentage from './MonthlyExpensePercentage';
 import ExpenseHistory from './ExpenseHistory';
 import IncomeHistory from './IncomeHistory';
+import { useRouter } from 'next/navigation';
 
 
 const DashBoard = () => {
+    const router = useRouter();
+    const handleSeeAll = () => {
+        router.push('/monthly-expense-breakdown');
+    }
     
     return (
         <div>
             <BalanceCard></BalanceCard>
 
-            <div className='mt-15 mb-15 flex gap-5'>
-                <BarChart></BarChart>
-                <MonthlyExpensePercentage></MonthlyExpensePercentage>
+            <div className='mb-15'>
+                <div className='mt-15  flex gap-5'>
+                    <BarChart></BarChart>
+                    <MonthlyExpensePercentage></MonthlyExpensePercentage>
+        
+                </div>
+                <div>
+                    <div onClick={()=>handleSeeAll()} className="flex items-center justify-center font-semibold mt-5 bg-green-400 py-1 rounded-2xl shadow-xl cursor-pointer">
+                        <button className="text-xl text-white  ">See all</button>
+                    </div>
+                </div>
             </div>
 
             <div className='flex flex-col gap-15'>
