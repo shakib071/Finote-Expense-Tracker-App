@@ -80,8 +80,8 @@ export default function IncomeHistory() {
                 <span className="font-medium text-gray-700">{t?.name}</span>
               </td>
               <td className="py-3 text-gray-600">{covertDateTimeToBD(t?.createdAt)}</td>
-              <td className="py-3 text-right text-red-500 font-semibold">
-                {t?.amount}
+              <td className="py-3 text-right text-green-500 font-semibold">
+                +{t?.amount}
               </td>
             </tr>
           ))}

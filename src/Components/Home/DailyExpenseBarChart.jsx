@@ -20,13 +20,18 @@ export default function DailyExpenseBarChart() {
   },[user?.uid,isRefetch,setIsRefetch,refetch])
 
   // calculate total sums for display
-  const total = useMemo(
-    () => ({
-      currentMonth: chartData?.reduce((acc, curr) => acc + curr?.currentMonth, 0),
-      prevMonth: chartData?.reduce((acc, curr) => acc + curr?.prevMonth, 0),
-    }),
-    []
-  );
+  const total = useMemo(() => {
+    if (!Array.isArray(chartData)) return { currentMonth: 0, prevMonth: 0 };
+
+    const currentMonthTotal = chartData.reduce((sum, item) => sum + (item.currentMonth || 0), 0);
+    const prevMonthTotal = chartData.reduce((sum, item) => sum + (item.prevMonth || 0), 0);
+
+    return {
+      currentMonth: currentMonthTotal,
+      prevMonth: prevMonthTotal,
+    };
+  }, [chartData]);
+
 
   const chartColors = {
     currentMonth: "#8884d8",

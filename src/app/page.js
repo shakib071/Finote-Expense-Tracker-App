@@ -246,7 +246,7 @@ export default function Home() {
 
 
   
-  console.log('user is ',user?.uid);
+  // console.log('user is ',user?.uid);
 
   if(loading || isLoading){
     return 'loading';

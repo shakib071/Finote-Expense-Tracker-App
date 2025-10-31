@@ -199,8 +199,8 @@ const page = () => {
                         >
                         <td className="py-3 text-gray-600">{t?.name}</td>
                         <td className="py-3 text-gray-600">{covertDateTimeToBD(t?.createdAt)}</td>
-                        <td className="py-3 text-right text-red-500 font-semibold">
-                            <span>-</span>{t?.amount}
+                        <td className="py-3 text-right text-green-500 font-semibold">
+                            <span>+</span>{t?.amount}
                         </td>
                         
                         </tr>
