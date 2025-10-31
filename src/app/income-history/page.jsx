@@ -1,6 +1,6 @@
 'use client';
 import useAuth from '@/Hooks/useAuth';
-import useExpenseHistoryByMonth from '@/Hooks/useExpenseHistoryByMonth';
+import useIncomeHistoryByMonth from '@/Hooks/useIncomeHistoryByMonth';
 import React, { useEffect, useState } from 'react';
 
 const page = () => {
@@ -12,9 +12,9 @@ const page = () => {
     const [pages, setPages] = useState([]);
     const [month, setMonth] = useState("");
     const [year, setYear] = useState("");
-    const {data:expenseHistoryByMonth,isLoading,refetch} = useExpenseHistoryByMonth(user?.uid,month,year,selectedPage,itemsPerPage,SearchQuery);
+    const {data:incomeHistoryByMonth,isLoading,refetch} = useIncomeHistoryByMonth(user?.uid,month,year,selectedPage,itemsPerPage,SearchQuery);
 
-    console.log(SearchQuery,expenseHistoryByMonth?.pagination);
+    
 
     useEffect(()=> {
         if(isRefetch && user?.uid){
@@ -37,12 +37,12 @@ const page = () => {
 
 
     useEffect(()=>{
-        const dataCount = expenseHistoryByMonth?.count;
+        const dataCount = incomeHistoryByMonth?.count;
         
         const numofPage = Math.ceil(dataCount/parseInt(itemsPerPage));
         setNumberOfPage(numofPage);
         refetch();
-   },[expenseHistoryByMonth?.count,itemsPerPage,refetch]);
+   },[incomeHistoryByMonth?.count,itemsPerPage,refetch]);
 
 
     useEffect(() => {
@@ -180,31 +180,25 @@ const page = () => {
 
 
             <div className="bg-white rounded-xl shadow-md  p-6 w-full mx-auto">
-                <h2 className="text-lg font-semibold mb-4">Expense History</h2>
+                <h2 className="text-lg font-semibold mb-4">Income History</h2>
                 <table className="w-full text-left border-collapse">
                     <thead>
                     <tr className="text-gray-500 text-sm border-b">
-                        <th className="pb-3">Category</th>
+                
                         <th className="pb-3">Name</th>
                         <th className="pb-3">Date</th>
-                        <th className="pb-3">Description</th>
                         <th className="pb-3 text-right">Amount</th>
                         
                     </tr>
                     </thead>
                     <tbody>
-                    {expenseHistoryByMonth?.pagination?.map((t,index) => (
+                    {incomeHistoryByMonth?.pagination?.map((t,index) => (
                         <tr
                         key={index}
                         className="border-b last:border-none hover:bg-gray-50 transition"
                         >
-                        <td className="py-3 flex items-center gap-3">
-                            <span className="font-medium text-gray-700">{t?.category}</span>
-                            
-                        </td>
                         <td className="py-3 text-gray-600">{t?.name}</td>
-                        <td className="py-3 text-gray-600">{covertDateTimeToBD(t?.date)}</td>
-                        <td className="py-3 text-gray-600">{t?.description}</td>
+                        <td className="py-3 text-gray-600">{covertDateTimeToBD(t?.createdAt)}</td>
                         <td className="py-3 text-right text-red-500 font-semibold">
                             <span>-</span>{t?.amount}
                         </td>
