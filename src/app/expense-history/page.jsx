@@ -14,7 +14,8 @@ const page = () => {
     const [year, setYear] = useState("");
     const {data:expenseHistoryByMonth,isLoading,refetch} = useExpenseHistoryByMonth(user?.uid,month,year,selectedPage,itemsPerPage,SearchQuery);
 
-    console.log(SearchQuery,expenseHistoryByMonth?.pagination);
+    // console.log(SearchQuery,expenseHistoryByMonth?.pagination);
+    console.log('count is ',expenseHistoryByMonth?.count);
 
     useEffect(()=> {
         if(isRefetch && user?.uid){
@@ -25,7 +26,7 @@ const page = () => {
 
     useEffect(()=> {
         refetch();
-    },[year,month,SearchQuery]);
+    },[year,month,SearchQuery,selectedPage]);
 
 
     // Automatically select current month & year

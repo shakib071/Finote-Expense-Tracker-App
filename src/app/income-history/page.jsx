@@ -25,7 +25,7 @@ const page = () => {
 
     useEffect(()=> {
         refetch();
-    },[year,month,SearchQuery]);
+    },[year,month,SearchQuery,selectedPage]);
 
 
     // Automatically select current month & year
