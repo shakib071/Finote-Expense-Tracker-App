@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import useAuth from '../Hooks/useAuth';
 
 const axiosSecure = axios.create({
-  baseURL:'http://localhost:5000',
+  baseURL:'https://finote-server.vercel.app',
 });
 
 const useAxiosSecure = () => {
