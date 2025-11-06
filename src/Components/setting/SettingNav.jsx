@@ -4,7 +4,6 @@ import React from "react";
 const SettingNav = ({ activeTab, setActiveTab }) => {
   const tabs = [
     { id: "account", label: "Account" },
-    { id: "session", label: "Session" },
     { id: "categories", label: "Categories" },
   ];
 

@@ -284,7 +284,7 @@ export default function Home() {
       {/* Main Content */}
       <main className="flex-1 p-6 bg-[#807d7d31] overflow-auto">
         <div>
-          <Navbar></Navbar>
+         
 
 
           {/* Plus button  */}

@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { MdPersonOutline } from "react-icons/md";
 import { HiOutlineBell } from "react-icons/hi2";
 import { HiOutlineSun } from "react-icons/hi2";
-import { IoSearchSharp } from "react-icons/io5";
 import { HiMoon } from "react-icons/hi";
 import useAuth from '@/Hooks/useAuth';
 import Swal from 'sweetalert2';
@@ -11,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Avatar from '../../../public/Avatar1.png';
 import Link from 'next/link';
+import logo from '../../../public/logo.png'
 
 const Navbar = () => {
     const [darkTheme , setDarkTheme] = useState(false);
@@ -41,10 +41,11 @@ const Navbar = () => {
     }
    
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        console.log('submitted');
+    const handleHome = () => {
+        router.push('/');
     }
+
+
 
     
     if(loading){
@@ -53,13 +54,10 @@ const Navbar = () => {
 
     return (
         
-        <div className='mb-10 flex justify-between items-center px-3'>
+        <div className='py-2 bg-white shadow-2xl flex justify-between items-center px-3'>
             {/* Searchbar  */}
-            <div >
-                <form onSubmit={handleSearch} className='flex items-center gap-2'>
-                    <input className='border-1 border-[#44424288] w-70 px-3 py-1 text-lg rounded-lg' type="text" placeholder='Search Here' />
-                    <button  className='text-xl p-2 rounded-lg bg-[#1512d8e8] text-white' type='submit'><IoSearchSharp /></button>
-                </form>
+            <div className='cursor-pointer' onClick={()=>handleHome()}>
+                <Image className='bg-white' src={logo} height={100} width={120} alt='logo'></Image>
             </div>
 
             {/* Accessbility Profile  */}

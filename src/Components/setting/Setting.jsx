@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import SettingNav from "./SettingNav";
 import Account from "./Account";
+import Categories from "./Categories";
 
 const Setting = () => {
   const [activeTab, setActiveTab] = useState("account");
@@ -13,8 +14,7 @@ const Setting = () => {
 
       <div className="p-6">
         {activeTab === "account" && <Account></Account>}
-        {activeTab === "session" && <h2>🕓 Session Management Content</h2>}
-        {activeTab === "categories" && <h2>📂 Category Settings Content</h2>}
+        {activeTab === "categories" && <Categories></Categories>}
       </div>
     </div>
   );
