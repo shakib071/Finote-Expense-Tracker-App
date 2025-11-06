@@ -19,6 +19,7 @@ import useAuth from "@/Hooks/useAuth";
 import useAxios from "@/Hooks/useAxios";
 import Swal from "sweetalert2";
 import useCategories from "@/Hooks/useCategories";
+import Setting from "@/Components/setting/Setting";
 
 
 
@@ -220,16 +221,12 @@ export default function Home() {
     switch (activeTab) {
       case "dashboard":
         return <DashBoard></DashBoard>;
-      case "expenses":
-        return <h2 className="text-2xl font-bold">Track Your Expenses Here</h2>;
-      case "analytic":
-        return <h2 className="text-2xl font-bold">View Your Analytic</h2>;
       case "profile":
         return <Profile></Profile>;
       case "support":
         return <h2 className="text-2xl font-bold">Adjust support</h2>;
       case "setting":
-        return <h2 className="text-2xl font-bold">Adjust setting</h2>;
+        return <Setting></Setting>;
       default:
         return <h2 className="text-2xl font-bold">Welcome to Finote</h2>;
     }
@@ -237,7 +234,6 @@ export default function Home() {
 
   const navItems = [
     { id: "dashboard", label: "Dashboard", icon: <FaHome /> },
-    { id: "analytic", label: "Analytic", icon: <BarChart3 /> },
     { id: "profile", label: "Profile", icon: <User /> },
     { id: "support", label: "Support", icon: <HelpCircle /> },
     { id: "setting", label: "Setting", icon: <FaCog /> },

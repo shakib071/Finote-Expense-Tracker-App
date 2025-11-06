@@ -1,0 +1,41 @@
+'use client'
+import useAuth from '@/Hooks/useAuth';
+import React from 'react';
+import Avatar from '../../../public/Avatar1.png';
+import Image from 'next/image';
+
+const Account = () => {
+    const {user,loading} = useAuth();
+    if(loading){
+        return 'loading';
+    }
+    return (
+        <div>
+            {user && 
+            <>
+                <div>
+                    <div className='flex bg-white mb-8 px-4 py-6 items-center shadow-xl justify-between rounded-xl'>
+                        <div className='flex gap-5 items-center'>
+                            <div>
+                                {user?.photoURL ? <p><Image width={96} height={96} className='w-15 h-15 rounded-full' src={user?.photoURL} alt="avatar" /></p> : <p><Image className='w-15 h-15' src={Avatar} alt="avatar" /></p>}
+                            </div>
+
+                            <div>
+                                <p className='text-xl font-bold mb-2'>{user?.displayName}</p>
+                                <p>{user?.email}</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p className='mb-2 font-semibold'>{user?.metadata?.creationTime}</p>
+                            <p className='text-[#00000073]'>{user?.emailVerified===true ? 'Verified':'Unverified'}</p>
+                        </div>
+                    </div>
+                </div>
+            </>
+        }   
+        </div>
+    );
+};
+
+export default Account;

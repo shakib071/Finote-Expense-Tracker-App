@@ -10,7 +10,7 @@ export default function ProgressBarChart() {
   const [balancePercent,setBalancePercent] = useState(50);
 
   const {data:incomeExpense,isLoading,refetch} = useIncomeExpense(user?.uid);
-  console.log(incomeExpense);
+  // console.log(incomeExpense);
 
   useEffect(()=> {
     setSpend(incomeExpense?.expense);
