@@ -21,7 +21,7 @@ const DashBoard = () => {
             <BalanceCard></BalanceCard>
 
             <div className='mb-15'>
-                <div className='mt-15  flex gap-5'>
+                <div className='mt-15  flex flex-col md:flex-row gap-5'>
                     <BarChart></BarChart>
                     <MonthlyExpensePercentage></MonthlyExpensePercentage>
         

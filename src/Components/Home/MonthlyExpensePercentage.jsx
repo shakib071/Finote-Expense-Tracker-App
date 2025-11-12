@@ -8,6 +8,7 @@ const MonthlyExpensePercentage = () => {
     const {user,loading,isRefetch,setIsRefetch} = useAuth();
     const {data:topMonthlyExpenseByCategory,isLoading,refetch} = useTopExpenseByCategory(user?.uid);
     const {data:incomeExpense,isLoading:isLoading2,refetch:refetch2} = useIncomeExpense(user?.uid);
+    console.log(topMonthlyExpenseByCategory);
 
     useEffect(()=> {
         if(isRefetch && user?.uid){
@@ -29,7 +30,7 @@ const MonthlyExpensePercentage = () => {
             {topMonthlyExpenseByCategory?.map((item,index)=>(
                 <div key={index} className='flex border-t-1 border-gray-300 items-center justify-between'>
                     <div className='flex items-center gap-3'>
-                        <p className='text-red-700'><FaCircle /></p>
+                        <p><FaCircle color={item.fill} /></p>
                         <p className='text-[#5a5959]'>{item.category}</p>
                     </div>
 

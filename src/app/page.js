@@ -254,7 +254,7 @@ export default function Home() {
       {/* Sidebar */}
       <aside
         className={`bg-[#2b30bc] py-2 px-3 flex flex-col   transition-all duration-300 ${
-          isCollapsed ? "w-18" : "w-64"
+          isCollapsed ? "w-16 md:w-18" : "w-33 md:w-64"
         }`}
       >
         {/* Hamburger */}
@@ -270,12 +270,12 @@ export default function Home() {
           {navItems.map((item) => (
             <button
               key={item.id}
-              className={`flex items-center text-xl gap-2 p-3 text-white rounded hover:bg-blue-500 ${
+              className={`flex items-center text-[13px] md:text-xl gap-2 p-2 md:p-3 text-white rounded hover:bg-blue-500 ${
                 activeTab === item.id ? "bg-blue-500 text-white" : ""
               }`}
               onClick={() => setActiveTab(item.id)}
             >
-              {item.icon}
+              <span className="text-lg ">{item.icon}</span>
               {!isCollapsed && item.label}
             </button>
           ))}
@@ -283,7 +283,7 @@ export default function Home() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-6 bg-[#807d7d31] overflow-auto">
+      <main className="flex-1 p-2 md:p-6 bg-[#807d7d31] overflow-auto">
         <div>
          
 

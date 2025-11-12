@@ -9,6 +9,7 @@ export default function DailyExpenseBarChart() {
   const {user,loading,isRefetch,setIsRefetch} = useAuth();
   const [activeChart, setActiveChart] = useState("currentMonth");
   const {data:chartData,isLoading,refetch} = useDailyExpense(user?.uid);
+  const [barWidth,setBarWidth] = useState(900);
   // console.log('ChartData is',chartData);
   
 
@@ -18,6 +19,19 @@ export default function DailyExpenseBarChart() {
       setIsRefetch(false);
     }
   },[user?.uid,isRefetch,setIsRefetch,refetch])
+
+    useEffect(()=> {
+    const handleWidth = () => {
+      const width = window.innerWidth;
+      if (width >= 1536) setBarWidth(900);
+      else if (width >= 1280) setBarWidth(900);
+      else if (width >= 1024) setBarWidth(900);
+      else if (width >= 768) setBarWidth(900);
+      else if (width >= 640) setBarWidth(900);
+      else setBarWidth(290);
+    };
+    handleWidth();
+  },[window?.innerWidth,setBarWidth,barWidth])
 
   // calculate total sums for display
   const total = useMemo(() => {
@@ -43,8 +57,8 @@ export default function DailyExpenseBarChart() {
   }
 
   return (
-    <div className="bg-white p-4 rounded-xl" style={{ maxWidth: 1000, margin: "0 auto" }}>
-      <h2 style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: 16 }}>
+    <div className="bg-white p-4  rounded-xl" style={{ maxWidth: 1000, margin: "0 auto" }}>
+      <h2 className="text-lg md:text-xl" style={{ fontWeight: "bold", marginBottom: 16 }}>
         Daily Expense Comparison
       </h2>
 
@@ -64,15 +78,15 @@ export default function DailyExpenseBarChart() {
               cursor: "pointer",
             }}
           >
-            {key === "currentMonth" ? "Current Month" : "Previous Month"} (
-            {total[key]?.toLocaleString()})
+            <span className="text-sm md:text-lg">{key === "currentMonth" ? "Current Month" : "Previous Month"} (
+            {total[key]?.toLocaleString()})</span>
           </button>
         ))}
       </div>
 
       {/* Bar Chart */}
       <BarChart
-        width={900}
+        width={barWidth}
         height={300}
         data={chartData}
         margin={{ top: 20, right: 6, left: 5, bottom: 5 }}
@@ -101,7 +115,8 @@ export default function DailyExpenseBarChart() {
             dataKey={activeChart} 
             position="top" 
             formatter={(value) => `${value}`} 
-            style={{ fontSize: 12, fill: "#333", fontWeight: "bold" }}
+            className="text-[8px] md:text-sm"
+            style={{ fill: "#333", fontWeight: "bold" }}
           />
         </Bar>
       </BarChart>

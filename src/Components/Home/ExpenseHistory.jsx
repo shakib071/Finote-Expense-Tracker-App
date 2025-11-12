@@ -58,15 +58,15 @@ export default function ExpenseHistory() {
   }
   
   return (
-    <div className="bg-white rounded-xl shadow-md  p-6 w-full mx-auto">
+    <div className="bg-white rounded-xl shadow-md p-4 md:p-6 w-full mx-auto">
       <h2 className="text-lg font-semibold mb-4">Expense History</h2>
       <table className="w-full text-left border-collapse">
         <thead>
           <tr className="text-gray-500 text-sm border-b">
-            <th className="pb-3">Category</th>
+            <th className="pb-3 px-1">Category</th>
             <th className="pb-3">Name</th>
             <th className="pb-3">Date</th>
-            <th className="pb-3">Description</th>
+            
             <th className="pb-3 text-right">Amount</th>
             
           </tr>
@@ -75,15 +75,16 @@ export default function ExpenseHistory() {
           {expenseHistory?.pagination?.map((t,index) => (
             <tr
               key={index}
-              className="border-b last:border-none hover:bg-gray-50 transition"
+              className="border-b  text-sm last:border-none hover:bg-gray-50 transition"
             >
-              <td className="py-3 flex items-center gap-3">
+              {/* <td className="py-3 flex items-center gap-3">
                 <span className="font-medium text-gray-700">{t?.category}</span>
-              </td>
-              <td className="py-3 text-gray-600">{t?.name}</td>
-              <td className="py-3 text-gray-600">{covertDateTimeToBD(t?.date)}</td>
-              <td className="py-3 text-gray-600">{t?.description}</td>
-              <td className="py-3 text-right text-red-500 font-semibold">
+              </td> */}
+              <td className="py-3 px-1 font-medium text-gray-600">{t?.category}</td>
+              <td className="py-3 px-1 text-gray-600">{t?.name}</td>
+              <td className="py-3 px-1 text-[10px] md:text-sm text-gray-600">{covertDateTimeToBD(t?.date)}</td>
+              
+              <td className="py-3 px-1 text-right text-red-500 font-semibold">
                 -{t?.amount}
               </td>
               

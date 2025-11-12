@@ -10,6 +10,9 @@ const page = () => {
     const {data:topMonthlyExpenseByCategory,isLoading,refetch} = useTopExpenseByCategory(user?.uid,-1);
     const {data:incomeExpense,isLoading:isLoading2,refetch:refetch2} = useIncomeExpense(user?.uid);
 
+
+    console.log(topMonthlyExpenseByCategory);
+
     useEffect(()=> {
         if(isRefetch && user?.uid){
             refetch();
