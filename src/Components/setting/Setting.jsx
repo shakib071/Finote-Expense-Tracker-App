@@ -10,6 +10,7 @@ const Setting = () => {
 
   return (
     <div>
+      <title>Setting | Finote</title>
       <SettingNav activeTab={activeTab} setActiveTab={setActiveTab} />
 
       <div className="p-6">

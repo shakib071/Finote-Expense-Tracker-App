@@ -8,6 +8,7 @@ import IncomeHistory from './IncomeHistory';
 import { useRouter } from 'next/navigation';
 
 
+
 const DashBoard = () => {
     const router = useRouter();
     const handleSeeAll = () => {
@@ -16,6 +17,7 @@ const DashBoard = () => {
     
     return (
         <div>
+            <title> Home | Finote</title>
             <BalanceCard></BalanceCard>
 
             <div className='mb-15'>

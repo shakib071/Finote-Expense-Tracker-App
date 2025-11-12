@@ -14,6 +14,7 @@ const Profile = () => {
     }
     return (
         <div className=''>
+            <title>Profile | Finote</title>
             {user && 
             <>
                 <div className='flex bg-white mb-8 px-4 py-6 items-center shadow-xl justify-between rounded-xl'>
