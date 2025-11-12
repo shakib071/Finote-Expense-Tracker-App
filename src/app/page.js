@@ -27,7 +27,7 @@ import Setting from "@/Components/setting/Setting";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("dashboard");
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [open, setOpen] = useState(false);
   const [showBalanseForm, setShowBalanseForm] = useState(false);
   const [showExpenseForm, setShowExpenseForm] = useState(false);
@@ -249,6 +249,7 @@ export default function Home() {
   }
 
   return (
+    
     <div className="flex h-screen  justify-center">
       {/* Sidebar */}
       <aside

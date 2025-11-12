@@ -7,6 +7,8 @@ import QueryProvider from "@/Components/Providers/QueryProvider";
 import Navbar from "@/Components/Shared/Navbar";
 
 
+
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -20,6 +22,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "Finote",
   description: "Finote a expense tracker app",
+  icons: {
+    icon: "/finote_favicon_32x32.png",
+  },
 };
 
 
