@@ -60,14 +60,14 @@ export default function ProfileChartBar() {
   }
 
   return (
-    <div className="p-4 bg-white shadow-xl rounded-lg w-full">
+    <div className="p-2 md:p-4 bg-white shadow-xl rounded-lg w-full">
       <div className="mb-2">
         <h2 className="text-lg font-semibold">Expense Summary</h2>
         <p className="text-sm text-gray-500">{sixMonthAgo} - {currMonth} {currentYear}</p>
       </div>
 
       <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={chartData} layout="vertical" margin={{ left: 10 }}>
+        <BarChart data={chartData} layout="vertical" margin={{ left: 0 }}>
           <CartesianGrid horizontal={false} stroke="#f0f0f0" />
           <XAxis type="number"  />
           <YAxis

@@ -30,7 +30,7 @@ export default function BarCharts() {
       else if (width >= 1024) setBarWidth(600);
       else if (width >= 768) setBarWidth(600);
       else if (width >= 640) setBarWidth(600);
-      else setBarWidth(300);
+      else setBarWidth(290);
     };
     handleWidth();
   },[window?.innerWidth,setBarWidth,barWidth])

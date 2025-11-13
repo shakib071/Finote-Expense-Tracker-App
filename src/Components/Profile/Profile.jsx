@@ -17,10 +17,10 @@ const Profile = () => {
             <title>Profile | Finote</title>
             {user && 
             <>
-                <div className='flex bg-white mb-8 px-4 py-6 items-center shadow-xl justify-between rounded-xl'>
-                    <div className='flex gap-5 items-center'>
+                <div className='md:flex bg-white mb-8 px-4 py-6 items-center shadow-xl justify-between rounded-xl'>
+                    <div className='flex gap-5 mb-2 md:mb-0 items-center'>
                         <div>
-                            {user?.photoURL ? <p><Image width={96} height={96} className='w-15 h-15 rounded-full' src={user?.photoURL} alt="avatar" /></p> : <p><Image className='w-15 h-15' src={Avatar} alt="avatar" /></p>}
+                            {user?.photoURL ? <p><Image width={96} height={96} className='w-14 h-14 md:w-15 md:h-15 rounded-full' src={user?.photoURL} alt="avatar" /></p> : <p><Image className='w-15 h-15' src={Avatar} alt="avatar" /></p>}
                         </div>
 
                         <div>

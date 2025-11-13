@@ -63,8 +63,8 @@ const BalanceCard = () => {
                     <hr className="border-t-2  border-gray-300"/>
                     
                 </div>
-                <div className='p-2 md:p-3 bg-white flex flex-col rounded-lg gap-2 md:gap-3'>
-                    <p className='text-[12px] md:text-lg text-[#555454] font-semibold'>Daily Average Expense</p>
+                <div className='p-2 md:p-3 bg-white flex flex-col rounded-lg gap-3'>
+                    <p className='text-[17px] md:text-lg text-[#555454] font-semibold'>Daily Expense</p>
                     <p className='md:text-2xl font-semibold'>$ {(Math.round(incomeExpense?.expense/day)) || 0}</p>
                     <hr className="border-t-2  border-gray-300"/>
                    

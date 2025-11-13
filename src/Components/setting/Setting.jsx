@@ -13,7 +13,7 @@ const Setting = () => {
       <title>Setting | Finote</title>
       <SettingNav activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      <div className="p-6">
+      <div className="md:p-6">
         {activeTab === "account" && <Account></Account>}
         {activeTab === "categories" && <Categories></Categories>}
       </div>

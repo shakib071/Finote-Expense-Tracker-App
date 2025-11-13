@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 
 
 
+
 const page = () => {
     const {user,loading,isRefetch,setIsRefetch} = useAuth();
     const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -14,10 +15,13 @@ const page = () => {
     const [pages, setPages] = useState([]);
     const [month, setMonth] = useState("");
     const [year, setYear] = useState("");
+    const [showModal, setShowModal] = useState(false);
+    const [modalValue,setModalValue] = useState(null);
     const {data:expenseHistoryByMonth,isLoading,refetch} = useExpenseHistoryByMonth(user?.uid,month,year,selectedPage,itemsPerPage,SearchQuery);
+    const currentYear = new Date().getFullYear();
 
     // console.log(SearchQuery,expenseHistoryByMonth?.pagination);
-    console.log('count is ',expenseHistoryByMonth?.count);
+    // console.log('count is ',expenseHistoryByMonth?.count);
 
     useEffect(()=> {
         if(isRefetch && user?.uid){
@@ -123,6 +127,11 @@ const page = () => {
         return bdFormatted;
     }
 
+
+    console.log(modalValue);
+
+    
+
     if(loading || isLoading){
         return 'loading';
     }
@@ -132,18 +141,18 @@ const page = () => {
             
 
 
-            <div className="p-6 bg-white rounded-xl shadow-md flex flex-col md:flex-row items-center gap-4 mb-6">
+            <div className="p-6 bg-white rounded-xl shadow-md flex flex-col md:flex-row items-center gap-3 md:gap-4 mb-6">
   
         
                 <div className="flex-1">
-                <form onSubmit={handleSearchQuery} className="flex items-center  bg-white border rounded-lg shadow-sm px-3 py-2">
+                <form onSubmit={handleSearchQuery} className="flex items-center  bg-white border rounded-lg shadow-sm px-3 py-1 md:py-2">
                     <input
                     type="text"
                     placeholder="Search your expenses"
                     name="searchQuery"
                     className="flex-1 outline-none text-gray-700 text-sm"
                     />
-                    <button className="ml-2 md:text-lg   btn btn-primary px-3 py-1 ">
+                    <button className="ml-2 md:text-lg   btn btn-primary px-3 md:py-1 ">
                     submit
                     </button>
                 </form>
@@ -151,7 +160,7 @@ const page = () => {
 
             
                 <div className="flex  items-center gap-2">
-                    <select value={month} onChange={(e) => setMonth(e.target.value)}  className="border rounded-lg px-3 py-1 text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select value={month} onChange={(e) => setMonth(e.target.value)}  className="border rounded-lg px-3 py-1 md:text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="0" disabled >Select a month</option>
                         <option value="1">January</option>
                         <option value="2">February</option>
@@ -168,13 +177,13 @@ const page = () => {
                         
                     </select>
 
-                    <select value={year} onChange={(e) => setYear(e.target.value)}  className="border rounded-lg px-3 py-1 text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500" >
+                    <select value={year} onChange={(e) => setYear(e.target.value)}  className="border rounded-lg px-3 py-1 md:text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500" >
                         <option value="" disabled >Select Year</option>
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                        <option value="2026">2026</option>
-                        <option value="2027">2027</option>
-                        <option value="2028">2028</option>
+                        <option value={currentYear-4}>{currentYear-4}</option>
+                        <option value={currentYear-3}>{currentYear-3}</option>
+                        <option value={currentYear-2}>{currentYear-2}</option>
+                        <option value={currentYear-1}>{currentYear-1}</option>
+                        <option value={currentYear}>{currentYear}</option>
                     </select>
                 </div>
 
@@ -187,11 +196,14 @@ const page = () => {
                 <table className="w-full text-left border-collapse">
                     <thead>
                     <tr className="text-gray-500 text-sm border-b">
-                        <th className="pb-3">Category</th>
+                        {/* <th className="pb-3">Category</th> */}
+                        <th className="pb-3">SL</th>
                         <th className="pb-3">Name</th>
-                        <th className="pb-3">Date</th>
-                        <th className="pb-3">Description</th>
+                        {/* <th className="pb-3">Date</th> */}
+                        {/* <th className="pb-3">Description</th> */}
                         <th className="pb-3 text-right">Amount</th>
+                        <th className="pb-3 text-right">Action</th>
+                        
                         
                     </tr>
                     </thead>
@@ -201,16 +213,18 @@ const page = () => {
                         key={index}
                         className="border-b last:border-none hover:bg-gray-50 transition"
                         >
-                        <td className="py-3 flex items-center gap-3">
+                        <td>{index+1}</td>
+                        {/* <td className="py-3 flex items-center gap-3">
                             <span className="font-medium text-gray-700">{t?.category}</span>
                             
-                        </td>
+                        </td> */}
                         <td className="py-3 text-gray-600">{t?.name}</td>
-                        <td className="py-3 text-gray-600">{covertDateTimeToBD(t?.date)}</td>
-                        <td className="py-3 text-gray-600">{t?.description}</td>
+                        {/* <td className="py-3 text-gray-600">{covertDateTimeToBD(t?.date)}</td> */}
+                        {/* <td className="py-3 text-gray-600">{t?.description}</td> */}
                         <td className="py-3 text-right text-red-500 font-semibold">
                             <span>-</span>{t?.amount}
                         </td>
+                        <td  className="py-3 text-right text-green-500 cursor-pointer font-semibold"><button onClick={() => {setShowModal(true),setModalValue(t)}}>details</button></td>
                         
                         </tr>
                     ))}
@@ -261,6 +275,30 @@ const page = () => {
                 </div>
 
             </div>
+
+
+             {/* Popup Modal */}
+            {showModal && (
+                <div className="fixed inset-0 bg-[#ffffff93]  bg-opacity-50 flex justify-center items-center z-50">
+                <div className="bg-white border-1 rounded-2xl shadow-lg w-96 p-6 relative">
+                    <h2 className="text-xl font-bold mb-4 text-center">Expense Details</h2>
+                    <div className="space-y-2 text-gray-700">
+                    <p><span className="font-semibold">Category:</span> {modalValue?.category}</p>
+                    <p><span className="font-semibold">Date:</span> {modalValue?.date
+}</p>
+                    <p><span className="font-semibold">Description:</span> {modalValue?.description
+}</p>
+                    <p><span className="font-semibold">Amount:</span> {modalValue?.amount}</p>
+                    </div>
+                    <button
+                    onClick={() => setShowModal(false)}
+                    className="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-xl"
+                    >
+                    &times;
+                    </button>
+                </div>
+                </div>
+            )}
         </div>
     );
 };

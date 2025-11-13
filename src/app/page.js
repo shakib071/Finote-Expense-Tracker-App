@@ -289,7 +289,7 @@ export default function Home() {
 
 
           {/* Plus button  */}
-          <div className="fixed bottom-20 right-20 flex flex-col z-100 items-end space-y-3">
+          <div className="fixed bottom-12 right-12 md:bottom-20 md:right-20 flex flex-col z-100 items-end space-y-3">
           {/* Floating options (only show when open) */}
             <div
               className={`flex flex-col items-end space-y-3 transition-all duration-300 ${
@@ -311,14 +311,14 @@ export default function Home() {
 
             {showBalanseForm && (
               <div className="fixed inset-0 bg-[#ffffff40] bg-opacity-50 flex items-center justify-center">
-                <div className="bg-white p-6 rounded-2xl shadow-lg w-80 relative">
+                <div className="bg-white  p-6 rounded-2xl shadow-lg w-70 md:w-80 relative">
                   <button
                     onClick={() => setShowBalanseForm(false)}
                     className="absolute top-3 right-3 text-gray-600 hover:text-red-600"
                   >
                     <X className="w-5 h-5" />
                   </button>
-                  <h2 className="text-xl font-semibold mb-4 text-center">Add Balance</h2>
+                  <h2 className="text-lg md:text-xl font-semibold mb-4 text-center">Add Balance</h2>
                   <form onSubmit={handleBalaceInput}  className="flex flex-col space-y-3">
                     <input
                       type="text"
@@ -353,14 +353,14 @@ export default function Home() {
             {/* Add expense form  */}
             {showExpenseForm && (
               <div className="fixed inset-0 shadow-2xl bg-[#ffffff40] bg-opacity-50 flex items-center justify-center">
-                <div className="bg-white p-6 rounded-2xl shadow-lg w-80 relative">
+                <div className="bg-white p-6 rounded-2xl shadow-lg w-70 md:w-80 relative">
                   <button
                     onClick={() => setShowExpenseForm(false)}
                     className="absolute top-3 right-3 text-gray-600 hover:text-red-600"
                   >
                     <X className="w-5 h-5" />
                   </button>
-                  <h2 className="text-xl font-semibold mb-4 text-center">Add Expense</h2>
+                  <h2 className="text-lg md:text-xl font-semibold mb-4 text-center">Add Expense</h2>
                   <form onSubmit={handleAddExpense}  className="flex flex-col space-y-3 sha">
                     {/* <input
                       type="text"
@@ -438,10 +438,10 @@ export default function Home() {
 
 
 
-          {/* Main + button */}
+           {/* Main + button */}
             <button
               onClick={() => setOpen(!open)}
-              className="flex items-center justify-center w-20 h-20 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition-transform duration-300"
+              className="flex items-center justify-center w-15 h-15 md:w-20 md:h-20 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition-transform duration-300"
               style={{ transform: open ? "rotate(45deg)" : "rotate(0deg)" }}
             >
               <Plus className="w-8 h-8" />

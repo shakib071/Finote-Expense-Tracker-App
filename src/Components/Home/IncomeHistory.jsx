@@ -2,7 +2,7 @@ import useAuth from "@/Hooks/useAuth";
 import useIncomeHistoryByMonth from "@/Hooks/useIncomeHistoryByMonth";
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from "react";
-import { FaSpa, FaCar, FaGraduationCap, FaTv, FaFileInvoiceDollar } from "react-icons/fa";
+
 
 
 

@@ -28,7 +28,7 @@ export default function DailyExpenseBarChart() {
       else if (width >= 1024) setBarWidth(900);
       else if (width >= 768) setBarWidth(900);
       else if (width >= 640) setBarWidth(900);
-      else setBarWidth(290);
+      else setBarWidth(280);
     };
     handleWidth();
   },[window?.innerWidth,setBarWidth,barWidth])

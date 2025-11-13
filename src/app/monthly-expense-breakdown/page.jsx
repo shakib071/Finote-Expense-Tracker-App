@@ -32,7 +32,7 @@ const page = () => {
                     {topMonthlyExpenseByCategory?.map((item,index)=>(
                         <div key={index} className='flex border-t-1 border-gray-300 items-center justify-between'>
                             <div className='flex items-center gap-3'>
-                                <p className='text-red-700'><FaCircle /></p>
+                                <p className='text-red-700'><FaCircle color={item?.fill} /></p>
                                 <p className='text-[#5a5959]'>{item?.category}</p>
                             </div>
         

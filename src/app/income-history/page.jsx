@@ -12,6 +12,7 @@ const page = () => {
     const [pages, setPages] = useState([]);
     const [month, setMonth] = useState("");
     const [year, setYear] = useState("");
+    const currentYear = new Date().getFullYear();
     const {data:incomeHistoryByMonth,isLoading,refetch} = useIncomeHistoryByMonth(user?.uid,month,year,selectedPage,itemsPerPage,SearchQuery);
 
     
@@ -167,11 +168,11 @@ const page = () => {
 
                     <select value={year} onChange={(e) => setYear(e.target.value)}  className="border rounded-lg px-3 py-1 text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500" >
                         <option value="" disabled >Select Year</option>
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                        <option value="2026">2026</option>
-                        <option value="2027">2027</option>
-                        <option value="2028">2028</option>
+                        <option value={currentYear-4}>{currentYear-4}</option>
+                        <option value={currentYear-3}>{currentYear-3}</option>
+                        <option value={currentYear-2}>{currentYear-2}</option>
+                        <option value={currentYear-1}>{currentYear-1}</option>
+                        <option value={currentYear}>{currentYear}</option>
                     </select>
                 </div>
 
@@ -198,7 +199,7 @@ const page = () => {
                         className="border-b last:border-none hover:bg-gray-50 transition"
                         >
                         <td className="py-3 text-gray-600">{t?.name}</td>
-                        <td className="py-3 text-gray-600">{covertDateTimeToBD(t?.createdAt)}</td>
+                        <td className="py-3 text-[11px] md:text-[16px] text-gray-600">{covertDateTimeToBD(t?.createdAt)}</td>
                         <td className="py-3 text-right text-green-500 font-semibold">
                             <span>+</span>{t?.amount}
                         </td>
